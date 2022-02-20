@@ -1,7 +1,7 @@
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
-export const initThreeApp = () => {
+const initThreeApp = () => {
 
   let container
   let renderer
@@ -54,3 +54,5 @@ export const initThreeApp = () => {
 
   animate()
 }
+
+export default initThreeApp
