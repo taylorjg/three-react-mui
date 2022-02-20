@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { FormControl, FormControlLabel, InputLabel, MenuItem, Select, Switch } from '@mui/material'
+import { FormControl, FormControlLabel, InputLabel, MenuItem, Select, Switch, Typography } from '@mui/material'
 import styled from '@emotion/styled'
 
 const StyledContent = styled.div`
@@ -29,8 +29,10 @@ const SettingsContent = ({ threeAppActions }) => {
   return (
     <StyledContent>
       <div>
-        <h2>Settings</h2>
-        <FormControl size="small" sx={{ minWidth: '10rem' }}>
+        <Typography variant="overline" component="div" gutterBottom>
+          Settings
+        </Typography>
+        <FormControl variant="standard" size="small" sx={{ minWidth: '10rem', my: '1rem' }}>
           <InputLabel id="cube-colour-label">Cube Colour</InputLabel>
           <Select
             labelId="cube-colour-label"

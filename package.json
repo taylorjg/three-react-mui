@@ -1,5 +1,6 @@
 {
   "name": "three-react-mui",
+  "description": "A trivial three.js app plus a slide out settings panel implemented in React/MUI",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

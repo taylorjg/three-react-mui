@@ -16,27 +16,25 @@ const threeApp = () => {
     container = document.getElementById("container")
     const w = container.offsetWidth
     const h = container.offsetHeight
-    console.log("[init]", { w, h })
-  
+
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(w, h)
     container.appendChild(renderer.domElement)
-  
+
     scene = new THREE.Scene()
     scene.background = new THREE.Color(0x000000)
-  
+
     camera = new THREE.PerspectiveCamera(34, w / h, 1, 100)
     camera.position.set(3, 3, 10)
     camera.lookAt(new THREE.Vector3(0, 0, 0))
     scene.add(camera)
-  
+
     window.addEventListener("resize", () => {
-      console.log("[resize]", { offsetWidth: container.offsetWidth, offsetHeight: container.offsetHeight })
       renderer.setSize(container.offsetWidth, container.offsetHeight)
       camera.aspect = container.offsetWidth / container.offsetHeight
       camera.updateProjectionMatrix()
     })
-  
+
     controls = new OrbitControls(camera, renderer.domElement)
     controls.minDistance = 5.0
     controls.maxDistance = 40.0
@@ -47,16 +45,25 @@ const threeApp = () => {
 
     const cubeSize = 2.5
     cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize)
-    cubeMaterial = new THREE.MeshBasicMaterial({ color: "blue" })
+    cubeMaterial = new THREE.MeshBasicMaterial({
+      color: "blue",
+      transparent: true,
+      opacity: .4,
+    })
     cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial)
     scene.add(cubeMesh)
-  
+
+    const cubeEdgesGeometry = new THREE.EdgesGeometry(cubeGeometry)
+    const cubeEdgesMaterial = new THREE.LineBasicMaterial({ color: 0xffffff })
+    const cubeLineSegments = new THREE.LineSegments(cubeEdgesGeometry, cubeEdgesMaterial)
+    scene.add(cubeLineSegments)
+
     const animate = () => {
       window.requestAnimationFrame(animate)
       controls.update()
       renderer.render(scene, camera)
     }
-  
+
     animate()
   }
 

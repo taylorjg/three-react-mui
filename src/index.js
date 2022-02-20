@@ -1,8 +1,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { injectGlobal } from '@emotion/css'
+import { createTheme, ThemeProvider } from '@mui/material'
 import Settings from "./Settings"
 import threeApp from "./three-app"
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark'
+  }
+})
 
 injectGlobal`
   html, body {
@@ -22,7 +29,9 @@ const threeAppActions = threeApp()
 
 ReactDOM.render(
   <React.StrictMode>
-    <Settings threeAppActions={threeAppActions} />
+    <ThemeProvider theme={darkTheme}>
+      <Settings threeAppActions={threeAppActions} />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("container")
 )

@@ -13,6 +13,7 @@ const StyledSettingsIcon = styled(SettingsIcon)`
   cursor: pointer;
   &:hover {
     opacity: 1;
+    transform: scale(1.2);
   }
 `
 
