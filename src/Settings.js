@@ -1,14 +1,26 @@
 import { useState } from "react"
 import { Button, Drawer } from "@mui/material"
 
-const Settings = () => {
+const Settings = ({ setCubeColour, setAutoRotate }) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
+  const openDrawer = () => {
+    setIsDrawerOpen(true)
+    setCubeColour("red")
+    setAutoRotate(false)
+  }
+
+  const closeDrawer = () => {
+    setIsDrawerOpen(false)
+    setCubeColour("green")
+    setAutoRotate(true)
+  }
+
   return (
     <>
-      <Button onClick={() => setIsDrawerOpen(true)}>Settings</Button>
-      <Drawer anchor="left" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+      <Button onClick={openDrawer}>Settings</Button>
+      <Drawer anchor="left" open={isDrawerOpen} onClose={closeDrawer}>
         TODO: Settings...
       </Drawer>
     </>

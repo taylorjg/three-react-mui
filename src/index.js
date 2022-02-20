@@ -18,11 +18,17 @@ injectGlobal`
   }
 `
 
+const threeAppActions = initThreeApp()
+console.dir(threeAppActions)
+
 ReactDOM.render(
   <React.StrictMode>
-    <Settings />
+    <Settings
+      setCubeColour={threeAppActions.setCubeColour}
+      setAutoRotate={threeAppActions.setAutoRotate}
+    />
   </React.StrictMode>,
   document.getElementById("container")
 )
 
-initThreeApp()
+threeAppActions.init()
