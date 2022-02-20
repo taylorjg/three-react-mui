@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { injectGlobal } from '@emotion/css'
 import Settings from "./Settings"
-import initThreeApp from "./three-app"
+import threeApp from "./three-app"
 
 injectGlobal`
   html, body {
@@ -18,15 +18,11 @@ injectGlobal`
   }
 `
 
-const threeAppActions = initThreeApp()
-console.dir(threeAppActions)
+const threeAppActions = threeApp()
 
 ReactDOM.render(
   <React.StrictMode>
-    <Settings
-      setCubeColour={threeAppActions.setCubeColour}
-      setAutoRotate={threeAppActions.setAutoRotate}
-    />
+    <Settings threeAppActions={threeAppActions} />
   </React.StrictMode>,
   document.getElementById("container")
 )

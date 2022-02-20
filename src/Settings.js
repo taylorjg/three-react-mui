@@ -1,27 +1,38 @@
 import { useState } from "react"
-import { Button, Drawer } from "@mui/material"
+import { Drawer } from "@mui/material"
+import SettingsIcon from "@mui/icons-material/Settings"
+import styled from '@emotion/styled'
+import SettingsContent from "./SettingsContent"
 
-const Settings = ({ setCubeColour, setAutoRotate }) => {
+const StyledSettingsIcon = styled(SettingsIcon)`
+  color: #ffffff;
+  opacity: .5;
+  position: fixed;
+  top: .5rem;
+  left: .5rem;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+`
+
+const Settings = ({ threeAppActions }) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const openDrawer = () => {
     setIsDrawerOpen(true)
-    setCubeColour("red")
-    setAutoRotate(false)
   }
 
   const closeDrawer = () => {
     setIsDrawerOpen(false)
-    setCubeColour("green")
-    setAutoRotate(true)
   }
 
   return (
     <>
-      <Button onClick={openDrawer}>Settings</Button>
+      <StyledSettingsIcon onClick={openDrawer} />
       <Drawer anchor="left" open={isDrawerOpen} onClose={closeDrawer}>
-        TODO: Settings...
+        <SettingsContent threeAppActions={threeAppActions} />
       </Drawer>
     </>
   )

@@ -26,7 +26,7 @@ const threeApp = () => {
     scene.background = new THREE.Color(0x000000)
   
     camera = new THREE.PerspectiveCamera(34, w / h, 1, 100)
-    camera.position.set(3, 3, 6)
+    camera.position.set(3, 3, 10)
     camera.lookAt(new THREE.Vector3(0, 0, 0))
     scene.add(camera)
   
@@ -44,8 +44,9 @@ const threeApp = () => {
     controls.dampingFactor = 0.9
     controls.autoRotate = true
     controls.autoRotateSpeed = 1.0
-  
-    cubeGeometry = new THREE.BoxGeometry()
+
+    const cubeSize = 2.5
+    cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize)
     cubeMaterial = new THREE.MeshBasicMaterial({ color: "blue" })
     cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial)
     scene.add(cubeMesh)
