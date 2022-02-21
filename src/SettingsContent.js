@@ -1,35 +1,30 @@
 import { useState } from "react"
-import { FormControl, FormControlLabel, InputLabel, MenuItem, Select, Switch, Typography } from '@mui/material'
+import { Button, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Switch, Typography } from '@mui/material'
 import styled from '@emotion/styled'
 
 const StyledContent = styled.div`
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
+  padding: 1rem 2rem;
 `
 
-const SettingsContent = ({ threeAppActions }) => {
+const SettingsContent = ({ initialValues, onOK, onCancel }) => {
 
-  const [cubeColour, setCubeColour] = useState("red")
-  const [autoRotate, setAutoRotate] = useState(true)
+  const [settings, setSettings] = useState({ ...initialValues })
 
   const handleChangeCubeColour = event => {
-    const value = event.target.value
-    setCubeColour(value)
-    threeAppActions.setCubeColour(value)
+    const cubeColour = event.target.value
+    setSettings(currentValues => ({ ...currentValues, cubeColour }))
   }
 
   const handleChangeAutoRotate = event => {
-    const value = event.target.checked
-    setAutoRotate(value)
-    threeAppActions.setAutoRotate(value)
+    const autoRotate = event.target.checked
+    setSettings(currentValues => ({ ...currentValues, autoRotate }))
   }
 
   return (
     <StyledContent>
       <div>
-        <Typography variant="overline" component="div" gutterBottom>
+        <Typography variant="subtitle1" component="div" gutterBottom>
           Settings
         </Typography>
         <FormControl variant="standard" size="small" sx={{ minWidth: '10rem', my: '1rem' }}>
@@ -37,7 +32,7 @@ const SettingsContent = ({ threeAppActions }) => {
           <Select
             labelId="cube-colour-label"
             id="cube-colour"
-            value={cubeColour}
+            value={settings.cubeColour}
             label="Cube Colour"
             onChange={handleChangeCubeColour}
           >
@@ -51,12 +46,17 @@ const SettingsContent = ({ threeAppActions }) => {
         <FormControlLabel
           control={
             <Switch
-              checked={autoRotate}
+              checked={settings.autoRotate}
+              size="small"
               onClick={handleChangeAutoRotate}
             />
           }
           label="Auto Rotate"
         />
+      </div>
+      <div style={{ marginTop: "2rem", display: "flex", justifyContent: "flex-end" }}>
+        <Button size="small" onClick={onCancel} style={{ marginRight: ".5rem" }}>Cancel</Button>
+        <Button variant="contained" size="small" onClick={() => onOK(settings)}>OK</Button>
       </div>
     </StyledContent>
   )

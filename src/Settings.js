@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Drawer } from "@mui/material"
 import SettingsIcon from "@mui/icons-material/Settings"
 import styled from '@emotion/styled'
@@ -21,6 +21,16 @@ const Settings = ({ threeAppActions }) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
+  const [settings, setSettings] = useState({
+    cubeColour: "red",
+    autoRotate: true
+  })
+
+  useEffect(() => {
+    threeAppActions.setCubeColour(settings.cubeColour)
+    threeAppActions.setAutoRotate(settings.autoRotate)
+  }, [settings, threeAppActions])
+
   const openDrawer = () => {
     setIsDrawerOpen(true)
   }
@@ -29,11 +39,20 @@ const Settings = ({ threeAppActions }) => {
     setIsDrawerOpen(false)
   }
 
+  const onOK = (settings) => {
+    setIsDrawerOpen(false)
+    setSettings(settings)
+  }
+
+  const onCancel = () => {
+    setIsDrawerOpen(false)
+  }
+
   return (
     <>
       <StyledSettingsIcon onClick={openDrawer} />
       <Drawer anchor="left" open={isDrawerOpen} onClose={closeDrawer}>
-        <SettingsContent threeAppActions={threeAppActions} />
+        <SettingsContent initialValues={settings} onOK={onOK} onCancel={onCancel} />
       </Drawer>
     </>
   )
